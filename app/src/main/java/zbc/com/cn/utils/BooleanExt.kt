@@ -1,9 +1,8 @@
 package zbc.com.cn.utils
 
-import kotlin.contracts.Returns
 
 
-sealed class BooleanExt<out T> {}
+sealed class BooleanExt<out T>
 
 object OtherWise : BooleanExt<Nothing>()
 

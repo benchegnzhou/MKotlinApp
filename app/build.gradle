@@ -27,6 +27,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //方法过多google提供的分包解决方案   参考 https://yq.aliyun.com/articles/12429   和  http://blog.csdn.net/gulihui890411/article/details/48551551
+    implementation dependenciesLib.multidex
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.3.0'

@@ -1,0 +1,49 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
+
+android {
+    compileSdkVersion 26
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+
+    }
+    
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+publish {
+    userOrg = 'sunzxyong'
+    uploadName = 'Recovery-no-op'
+    groupId = 'com.zxy.android'
+    artifactId = 'recovery-no-op'
+    publishVersion = '1.0.2'
+    repoName = 'maven'
+    dryRun = 'false'
+    desc = 'A crash recover framework'
+    website = 'https://github.com/Sunzxyong/Recovery'
+    issueTracker = 'https://github.com/Sunzxyong/Recovery/issues'
+    repository = 'https://github.com/Sunzxyong/Recovery.git'
+    bintrayUser = properties.getProperty("bintray.user")
+    bintrayKey = properties.getProperty("bintray.apikey")
+}

@@ -1,2 +1,2 @@
-include ':app', ':CalcLib'
+include ':app', ':CalcLib', ':recovery', ':recovery-no-op'
 rootProject.name='MKotlinApp'
