@@ -30,7 +30,6 @@ inline fun <T> Boolean.yes(block: () -> T): BooleanExt<T> {
             return OtherWise
         }
     }
-
 }
 
 fun main(args: Array<String>) {

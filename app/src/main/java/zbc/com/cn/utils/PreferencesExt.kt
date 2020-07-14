@@ -15,7 +15,7 @@ class PreferencesExt<T>(
     }
 
     override fun getValue(thisRef: Any, property: KProperty<*>): T {
-
+        return findPreference(name, default)
     }
 
     override fun setValue(thisRef: Any, property: KProperty<*>, value: T) {
@@ -24,22 +24,33 @@ class PreferencesExt<T>(
 
     }
 
+    private fun <T> findPreference(name: String, defultValue: T): T {
+        return with(prefs) {
+            when (defultValue) {
+                is Int -> getInt(name, defultValue)
+                is Long -> getLong(name, defultValue)
+                is Float -> getFloat(name, defultValue)
+                is String -> getString(name, defultValue)
+                is Boolean -> getBoolean(name, defultValue)
+                else -> throw IllegalArgumentException("不受支持的类型 ${value}")
+            }
+        } as T
+    }
+
     private fun putPreference(name: String, value: T) {
-        when (value) {
-            is Int -> prefs.edit().putInt(name, value)
-            is Long -> prefs.edit().putLong(name, value)
-            is Float -> prefs.edit().putFloat(name, value)
-            is String -> prefs.edit().putString(name, value)
-            is Boolean -> prefs.edit().putBoolean(name, value)
-            else -> throw IllegalArgumentException("不受支持的类型 ${value}")
-        }
+        with(prefs.edit()) {
+            when (value) {
+                is Int -> putInt(name, value)
+                is Long -> putLong(name, value)
+                is Float -> putFloat(name, value)
+                is String -> putString(name, value)
+                is Boolean -> putBoolean(name, value)
+                else -> throw IllegalArgumentException("不受支持的类型 ${value}")
+            }
+        }.commit()
+
     }
 
 
 }
 
-
-fun main(args: Array<String>) {
-
-
-}

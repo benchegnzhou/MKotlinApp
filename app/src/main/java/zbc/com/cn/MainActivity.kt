@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.TextView
+import zbc.com.cn.utils.UserMsg
 
 class MainActivity : AppCompatActivity() {
 
@@ -11,13 +12,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        findViewById<EditText>(R.id.et_1)
-        findViewById<EditText>(R.id.et_2)
-        findViewById<EditText>(R.id.et_3)
+        val userName = findViewById<EditText>(R.id.et_1)
+        val password = findViewById<EditText>(R.id.et_2)
+        val isVisable = findViewById<EditText>(R.id.et_3)
         findViewById<TextView>(R.id.tv_ok).setOnClickListener { view ->
             when (view.id) {
                 R.id.tv_ok -> {
-
+                    UserMsg.userName = userName.text.toString().trim()
+                    UserMsg.password = password.text.toString().trim().toLong()
+                    UserMsg.visiable = "true" == (isVisable.text.toString().trim().toLowerCase())
                 }
 
                 else -> {
@@ -25,7 +28,9 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
+        userName.setText(UserMsg.userName)
+        password.setText(UserMsg.password.toString())
+        isVisable.setText(UserMsg.visiable.toString())
 
     }
 }
