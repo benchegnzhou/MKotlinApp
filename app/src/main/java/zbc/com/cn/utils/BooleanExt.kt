@@ -44,5 +44,28 @@ fun main(args: Array<String>) {
     }
     val a = true.yes(lambda).otherwise(lambda2)
     print(a)
+
+    for (i in fibonacci){
+        println(i)
+        //打印的时候，调Next方法，next方法把我们刚刚设置给next的方法返回
+        //直到循环厕所超过100的时候，跳出
+        if (i > 100)break
+    }
+
 }
 
+
+val fibonacci = sequence {
+    yield(1)
+    //调这个值的时候，先把1赋给next
+    var cur = 1
+    var next = 1
+
+    while (true){
+        yield(next)
+        //协程被挂起
+        val tmp = cur + next
+        cur = next
+        next = tmp
+    }
+}

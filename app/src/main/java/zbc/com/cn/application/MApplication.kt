@@ -8,7 +8,6 @@ private lateinit var INSTANCE: Application
 
 class MApplication : Application() {
 
-
     override fun onCreate() {
         super.onCreate()
         INSTANCE = this
