@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import com.zbc.mvp.IMvpView
 import com.zbc.mvp.IPresenter
 import java.lang.Thread.yield
+import java.lang.reflect.ParameterizedType
 
 import kotlin.reflect.KClass
 import kotlin.reflect.KType
@@ -50,5 +51,27 @@ abstract class BaseFragment<out P : BasePresenter<BaseFragment<P>>> : IMvpView<P
 
     }
 
+
+    /**
+     * java版本创建presenter
+     */
+    fun createPresenter(): P {
+        return sequence {
+            var thisClass: Class<*> = this@BaseFragment::class.java
+
+            while (true) {
+                yield(thisClass.genericSuperclass)
+                thisClass = thisClass.superclass ?: break
+            }
+        }.filter {
+            it is ParameterizedType
+        }.flatMap {
+            (it as ParameterizedType).actualTypeArguments.asSequence()
+        }.first {
+            it is Class<*> && IPresenter::class.java.isAssignableFrom(it)
+        }.let {
+            return (it as Class<P>).newInstance()
+        }
+    }
 
 }
