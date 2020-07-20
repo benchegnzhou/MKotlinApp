@@ -14,7 +14,7 @@ abstract class BasePresenter<out V : IMvpView<IPresenter<V>>> : IPresenter<V> {
 
     override fun onCreate(saveInstanceState: Bundle?) = Unit
 
-    override fun saveInstanceState(outState: Bundle) = Unit
+    override fun onSaveInstanceState(outState: Bundle) = Unit
 
     override fun onViewStateRestored(saveInstanceState: Bundle?) = Unit
 
@@ -26,7 +26,7 @@ abstract class BasePresenter<out V : IMvpView<IPresenter<V>>> : IPresenter<V> {
 
     override fun onStop() = Unit
 
-    override fun onDestory() = Unit
+    override fun onDestroy() = Unit
 
 
 }

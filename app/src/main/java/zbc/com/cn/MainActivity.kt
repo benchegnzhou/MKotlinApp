@@ -2,8 +2,10 @@ package zbc.com.cn
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
+import com.zbc.mvp.impl.MainFragment
 import zbc.com.cn.utils.UserMsg
 
 class MainActivity : AppCompatActivity() {
@@ -32,5 +34,10 @@ class MainActivity : AppCompatActivity() {
         password.setText(UserMsg.password.toString())
         isVisable.setText(UserMsg.visiable.toString())
 
+        val mainFragment = MainFragment()
+
+        Log.d("MainActivity", mainFragment.presenter.toString())
+        Log.d("MainActivity", mainFragment.view.toString())
+        Log.d("MainActivity", mainFragment.toString())
     }
 }

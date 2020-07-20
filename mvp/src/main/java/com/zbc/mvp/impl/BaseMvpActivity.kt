@@ -3,9 +3,12 @@ package com.zbc.mvp.impl
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.zbc.mvp.IMvpView
+import com.zbc.mvp.IPresenter
 import kotlin.reflect.KClass
-import kotlin.reflect.KType
+import kotlin.reflect.full.isSubclassOf
+import kotlin.reflect.full.primaryConstructor
 import kotlin.reflect.jvm.jvmErasure
+
 
 /**
  * Created by benchengzhou on 2020/7/17  17:13 .
@@ -28,35 +31,39 @@ abstract class BaseMvpActivity<out P : BasePresenter<BaseMvpActivity<P>>> : IMvp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        presenter.onCreate(savedInstanceState)
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
 
-    override fun onStop() {
-        super.onStop()
-    }
-
-    override fun saveInstanceState(outState: Bundle) {
-
-    }
-
-    override fun onViewStateRestored(saveInstanceState: Bundle?) {
-
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        presenter.onSaveInstanceState(outState)
     }
 
 
     override fun onResume() {
         super.onResume()
+        presenter.onResume()
     }
 
     override fun onPause() {
         super.onPause()
+        presenter.onPause()
     }
 
-    override fun onDestory() {
-//        super.onDestory()
+    override fun onStart() {
+        super.onStart()
+        presenter.onStart()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        presenter.onStop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.onDestroy()
     }
 
 
@@ -68,6 +75,9 @@ abstract class BaseMvpActivity<out P : BasePresenter<BaseMvpActivity<P>>> : IMvp
         sequence {
             var thisClass: KClass<*> = this@BaseMvpActivity::class
             while (true) {
+                //https://www.jianshu.com/p/9f720b9ccdea?utm_source=desktop&utm_medium=timeline
+                //https://blog.csdn.net/weixin_34306593/article/details/89691830
+                //yield是一个suspend方法, 放弃执行权, 并将数据返回.
                 yield(thisClass.supertypes)
                 //找到thisClass的所有父类，supertypes是包含接口的
                 thisClass = thisClass.supertypes.firstOrNull()?.jvmErasure ?: break
@@ -76,10 +86,12 @@ abstract class BaseMvpActivity<out P : BasePresenter<BaseMvpActivity<P>>> : IMvp
             it.flatMap {
                 //获取到泛型参数
                 it.arguments
-            }
-        }.first{
-            it.
+            }.asSequence()
+        }.first {
+            it.type?.jvmErasure?.isSubclassOf(IPresenter::class) ?: false
+        }.let {
+            return it.type!!.jvmErasure.primaryConstructor!!.call() as P
         }
-        return
+
     }
 }

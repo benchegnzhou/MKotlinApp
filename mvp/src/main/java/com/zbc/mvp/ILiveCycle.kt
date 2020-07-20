@@ -6,7 +6,7 @@ interface ILiveCycle {
 
     fun onCreate(saveInstanceState: Bundle?)
 
-    fun saveInstanceState(outState: Bundle)
+    fun onSaveInstanceState(outState: Bundle)
 
     fun onViewStateRestored(saveInstanceState: Bundle?)
 
@@ -19,7 +19,7 @@ interface ILiveCycle {
 
     fun onStop()
 
-    fun onDestory()
+    fun onDestroy()
 
 
 }
