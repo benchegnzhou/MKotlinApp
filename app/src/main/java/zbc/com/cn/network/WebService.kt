@@ -7,6 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import zbc.com.cn.application.AppContext
+import zbc.com.cn.interceptors.AuthInterceptor
 import zbc.com.cn.utils.ensureDir
 import java.io.File
 import java.util.concurrent.TimeUnit
@@ -36,6 +37,7 @@ val retrofit by lazy {
                 .readTimeout(60, TimeUnit.SECONDS)
                 .writeTimeout(60, TimeUnit.SECONDS)
                 .cache(Cache(cacheFile, 1024 * 1024 * 1024))
+                .addInterceptor(AuthInterceptor())
                 .addInterceptor(
                     HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
                 )
