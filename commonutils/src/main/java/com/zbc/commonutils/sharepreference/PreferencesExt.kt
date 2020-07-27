@@ -1,4 +1,4 @@
-package zbc.com.cn.utils
+package com.zbc.commonutils.sharepreference
 
 import android.content.Context
 import java.lang.IllegalArgumentException

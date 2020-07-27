@@ -1,3 +1,4 @@
+include ':commonutils'
 include ':mvp'
 include ':app', ':CalcLib', ':recovery', ':recovery-no-op'
 rootProject.name='MKotlinApp'
