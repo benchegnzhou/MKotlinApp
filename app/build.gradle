@@ -2,11 +2,28 @@ apply plugin: 'com.android.application'
 
 
 apply plugin: 'kotlin-android'
-
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-noarg'
+apply plugin: 'kotlin-allopen'
 apply plugin: 'kotlin-android-extensions'
+
+
+
+
+
+
 //通用配置引入
 apply from: '../commonConfig.gradle'
 
+
+noArg {
+    annotation("zbc.com.cn.annotations.Poko")
+}
+allOpen  {
+    annotation("zbc.com.cn.annotations.Poko")
+}
+
+//    mainClassName = 'com.zbc..MiniCalculatorKt'
 android {
     compileSdkVersion android.compileSdkVersion
     defaultConfig {
@@ -23,6 +40,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+
 }
 
 dependencies {
@@ -57,4 +76,12 @@ dependencies {
     api "org.jetbrains.anko:anko-sdk15-listeners:$anko_version"
 
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
+
+
+    implementation 'com.google.dagger:dagger:2.23.2'
+    kapt  'com.google.dagger:dagger-compiler::2.23.2'
+
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
 }

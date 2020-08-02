@@ -25,6 +25,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+
 }
 
 dependencies {
@@ -38,5 +40,8 @@ dependencies {
     implementation 'com.orhanobut:logger:2.2.0'
 
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
+
+
 
 }
