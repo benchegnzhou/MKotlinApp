@@ -20,7 +20,7 @@ class AuthInterceptor : Interceptor {
 
                         header("Authorization",auth)
                     }
-                    AccountManager.isLogin()->{
+                    AccountManager.isLogedIn()->{
                     val token ="Token "+AccountManager.token
                         header("Token",token)
                     }
@@ -31,6 +31,7 @@ class AuthInterceptor : Interceptor {
 
                 }
             })
+            
     }
 
 }

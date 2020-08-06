@@ -7,11 +7,11 @@ import kotlin.reflect.KProperty
 
 
 class PreferencesExt<T>(
-    var context: Context, var name: String, var value: T,
+    var context: Context, var name: String,
     var default: T, var prfName: String = "zbc_sp"
 ) : ReadWriteProperty<Any, T> {
     private val prefs by lazy {
-        context.getSharedPreferences("zbc_user_info", Context.MODE_PRIVATE)
+        context.getSharedPreferences(prfName, Context.MODE_PRIVATE)
     }
 
     override fun getValue(thisRef: Any, property: KProperty<*>): T {
@@ -32,7 +32,7 @@ class PreferencesExt<T>(
                 is Float -> getFloat(name, defultValue)
                 is String -> getString(name, defultValue)
                 is Boolean -> getBoolean(name, defultValue)
-                else -> throw IllegalArgumentException("不受支持的类型 ${value}")
+                else -> throw IllegalArgumentException("不受支持的类型 ${default}")
             }
         } as T
     }
