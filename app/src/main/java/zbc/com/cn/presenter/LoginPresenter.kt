@@ -7,6 +7,7 @@ import zbc.com.cn.modle.AccountManager
 import zbc.com.cn.utils.otherwise
 import zbc.com.cn.utils.yes
 import zbc.com.cn.view.LoginActivity
+import java.lang.IllegalArgumentException
 
 class LoginPresenter : BasePresenter<LoginActivity>() {
 
@@ -23,15 +24,23 @@ class LoginPresenter : BasePresenter<LoginActivity>() {
                             .login()
                             .subscribe({
                                 //登录成功
-                                view.showTips(view., "用户名错误")
+                                view.loginFail(
+                                    throws = throw IllegalArgumentException(
+                                        "用户名不符合规范"
+                                    )
+                                )
                             }, {
                                 //登录失败
-                                Toast.makeText(AppContext, "登录失败", Toast.LENGTH_SHORT)
+                                view.loginFail(it)
                             })
 
                     }
                     .otherwise {
-                        view.showTips(view., "密码错误")
+                        view.loginFail(
+                            throws = throw IllegalArgumentException(
+                                "密码不符合规范"
+                            )
+                        )
                     }
             }
             .otherwise {
