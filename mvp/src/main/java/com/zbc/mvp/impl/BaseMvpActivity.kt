@@ -66,6 +66,10 @@ abstract class BaseMvpActivity<out P : BasePresenter<BaseMvpActivity<P>>> : IMvp
         presenter.onDestroy()
     }
 
+    override fun onViewStateRestored(saveInstanceState: Bundle?) {
+
+    }
+
 
     /**
      * 创建  Presenter

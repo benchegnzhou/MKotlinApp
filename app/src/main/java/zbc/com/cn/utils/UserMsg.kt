@@ -1,5 +1,6 @@
 package zbc.com.cn.utils
 
+import com.zbc.commonutils.sharepreference.PreferencesExt
 import zbc.com.cn.application.AppContext
 
 /**
@@ -11,24 +12,21 @@ import zbc.com.cn.application.AppContext
  */
 
 object  UserMsg {
-    var userName: String by com.zbc.commonutils.sharepreference.PreferencesExt(
+    var userName: String by PreferencesExt(
         AppContext,
         "userName",
         "",
-        "",
         "user_Info"
     )
-    var password: Long by com.zbc.commonutils.sharepreference.PreferencesExt(
+    var password: Long by  PreferencesExt(
         AppContext,
         "password",
         0,
-        0,
         "user_Info"
     )
-    var visiable: Boolean by com.zbc.commonutils.sharepreference.PreferencesExt(
+    var visiable: Boolean by PreferencesExt(
         AppContext,
         "isVisable",
-        false,
         false,
         "user_Info"
     )
