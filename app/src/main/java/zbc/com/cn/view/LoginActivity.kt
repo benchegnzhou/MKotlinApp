@@ -27,11 +27,11 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>() {
 
 
     fun loginStart() {
-
+        loginProgress.visibility=View.VISIBLE
     }
 
     fun loginFinish() {
-
+        loginProgress.visibility=View.GONE
     }
 
     fun logninSuccess(user: User) {

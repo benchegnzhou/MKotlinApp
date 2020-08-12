@@ -1,5 +1,8 @@
 package zbc.com.cn.network
 
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -30,7 +33,13 @@ val retrofit by lazy {
     Retrofit
         .Builder()
         .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        //拷贝开源项目源码，包名创建相同可以完成对引用项目的扩展,以后的网络请求都不切换线程了
+        .addCallAdapterFactory(
+            RxJava2CallAdapterFactory.createWithSchedulers(
+                Schedulers.io(),
+                AndroidSchedulers.mainThread()
+            )
+        )
         .client(
             OkHttpClient()
                 .newBuilder()

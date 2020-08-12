@@ -57,9 +57,6 @@ object AccountManager {
 
 
     fun login() = AuthorService.createAuthorization(AuthorizationReq())
-        .observeOn(AndroidSchedulers.mainThread())
-        //定义程序执行在IO线程
-        .subscribeOn(Schedulers.io())
         .doOnNext {
             //执行完成没有token，说明上次已经登录但是没有执行登出操作
             if (it.token.isEmpty()) {
@@ -98,6 +95,10 @@ object AccountManager {
             //登录成功调用回调接口
             notityLogin(it)
         }
+        //放在墙面只用第一次变换有效，放在最后表示全部请求都有效
+        .observeOn(AndroidSchedulers.mainThread())
+        //定义程序执行在IO线程
+        .subscribeOn(Schedulers.io())
 
     fun logout() = AuthorService.deleteAuthorization(authId)
         .doOnNext {
@@ -111,7 +112,10 @@ object AccountManager {
             } else {
                 throw HttpException(it)
             }
-        }
+        } //放在墙面只用第一次变换有效，放在最后表示全部请求都有效
+        .observeOn(AndroidSchedulers.mainThread())
+        //定义程序执行在IO线程
+        .subscribeOn(Schedulers.io())
 
 
     class AccountException(val authorizationRsp: AuthorizationRsp) :
