@@ -1,14 +1,12 @@
 package zbc.com.cn.presenter
 
-import android.widget.Toast
 import com.zbc.mvp.impl.BasePresenter
-import zbc.com.cn.application.AppContext
 import zbc.com.cn.modle.AccountManager
 import zbc.com.cn.modle.onAccountStatesChangeListener
 import zbc.com.cn.network.entities.User
 import zbc.com.cn.utils.otherwise
 import zbc.com.cn.utils.yes
-import zbc.com.cn.view.LoginActivity
+import zbc.com.cn.view.activity.LoginActivity
 import java.lang.IllegalArgumentException
 
 class LoginPresenter : BasePresenter<LoginActivity>(), onAccountStatesChangeListener {

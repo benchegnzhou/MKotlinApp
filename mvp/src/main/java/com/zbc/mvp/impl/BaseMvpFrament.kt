@@ -17,7 +17,7 @@ import kotlin.reflect.full.isSubclassOf
 import kotlin.reflect.full.primaryConstructor
 import kotlin.reflect.jvm.jvmErasure
 
-abstract class BaseFragment<out P : BasePresenter<BaseFragment<P>>> : IMvpView<P>, Fragment() {
+abstract class BaseMvpFrament<out P : BasePresenter<BaseMvpFrament<P>>> : IMvpView<P>, Fragment() {
 
     override val presenter: P
 
@@ -34,7 +34,7 @@ abstract class BaseFragment<out P : BasePresenter<BaseFragment<P>>> : IMvpView<P
      */
     fun createPresenterKt(): P {
         sequence {
-            var thisClass: KClass<*> = this@BaseFragment::class
+            var thisClass: KClass<*> = this@BaseMvpFrament::class
             while (true) {
                 //https://www.jianshu.com/p/9f720b9ccdea?utm_source=desktop&utm_medium=timeline
                 //https://blog.csdn.net/weixin_34306593/article/details/89691830
@@ -62,7 +62,7 @@ abstract class BaseFragment<out P : BasePresenter<BaseFragment<P>>> : IMvpView<P
      */
     fun createPresenter(): P {
         return sequence {
-            var thisClass: Class<*> = this@BaseFragment::class.java
+            var thisClass: Class<*> = this@BaseMvpFrament::class.java
 
             while (true) {
                 yield(thisClass.genericSuperclass)
@@ -125,6 +125,6 @@ abstract class BaseFragment<out P : BasePresenter<BaseFragment<P>>> : IMvpView<P
 
 
 
-class MainFragment:BaseFragment<MainPresenter>()
+class MainFragment:BaseMvpFrament<MainPresenter>()
 
 class MainPresenter:BasePresenter<MainFragment>()
