@@ -11,6 +11,7 @@ import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.support.v4.nestedScrollView
 import zbc.com.cn.R
 import zbc.com.cn.presenter.AboutPresenter
+import zbc.com.cn.utils.markdownText
 import zbc.com.cn.view.activity.LoginActivity
 
 /**
@@ -49,16 +50,18 @@ class AboutFragment : BaseMvpFrament<AboutPresenter>() {
                         textSize = 40f
                         //响应点击事件，可以直接写
                         onClick {
-                                alert {
-                                    customView{
-                                        scrollView {
-                                            textView {
-                                                padding= dip(resources.getDimension(R.dimen.qb_px_10))
-                                            }
+                            alert {
+                                customView {
+                                    scrollView {
+                                        textView {
+                                            padding = dip(resources.getDimension(R.dimen.qb_px_10))
+                                            markdownText =
+                                                assets.open("licenses.md")
+                                                    .bufferedReader(Charsets.UTF_8).readText()
+                                        }
                                     }
                                 }
-
-                            }
+                            }.show()
                         }
                     }.lparams(width = wrapContent, height = wrapContent) {
                         gravity = Gravity.CENTER_HORIZONTAL

@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.ContextWrapper
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
+import com.zzhoujay.richtext.RichText
 
 
 private lateinit var INSTANCE: Application
@@ -14,6 +15,13 @@ class MApplication : Application() {
         super.onCreate()
         INSTANCE = this
         Logger.addLogAdapter(AndroidLogAdapter())
+        richTextInit()
+    }
+
+
+    fun richTextInit() {
+        RichText.initCacheDir(this);
+        RichText.debugMode = true;
     }
 }
 
