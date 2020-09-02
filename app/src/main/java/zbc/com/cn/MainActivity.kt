@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
 import com.zbc.mvp.impl.MainFragment
+import kotlinx.android.synthetic.main.activity_main.*
 import zbc.com.cn.utils.UserMsg
 
 class MainActivity : AppCompatActivity() {
@@ -17,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         val userName = findViewById<EditText>(R.id.et_1)
         val password = findViewById<EditText>(R.id.et_2)
         val isVisable = findViewById<EditText>(R.id.et_3)
-        findViewById<TextView>(R.id.tv_ok).setOnClickListener { view ->
+        tv_ok.setOnClickListener { view ->
             when (view.id) {
                 R.id.tv_ok -> {
                     UserMsg.userName = userName.text.toString().trim()
@@ -39,5 +40,6 @@ class MainActivity : AppCompatActivity() {
         Log.d("MainActivity", mainFragment.presenter.toString())
         Log.d("MainActivity", mainFragment.view.toString())
         Log.d("MainActivity", mainFragment.toString())
+
     }
 }
