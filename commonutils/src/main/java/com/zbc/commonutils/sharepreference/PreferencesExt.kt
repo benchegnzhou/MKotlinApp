@@ -15,14 +15,15 @@ class PreferencesExt<T>(
     }
 
     override fun getValue(thisRef: Any, property: KProperty<*>): T {
-        return findPreference(name, default)
+        return findPreference(findProperName(property), default)
     }
 
     override fun setValue(thisRef: Any, property: KProperty<*>, value: T) {
 
-        putPreference(name, value)
+        putPreference(findProperName(property), value)
 
     }
+    private fun findProperName(property: KProperty<*>) = if(name.isEmpty()) property.name else name
 
     private fun <T> findPreference(name: String, defultValue: T): T {
         return with(prefs) {

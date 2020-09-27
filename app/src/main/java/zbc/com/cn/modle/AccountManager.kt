@@ -4,7 +4,6 @@ import com.google.gson.Gson
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import org.jetbrains.anko.Android
 import retrofit2.HttpException
 import zbc.com.cn.network.entities.AuthorizationReq
 import zbc.com.cn.network.entities.AuthorizationRsp
