@@ -45,14 +45,15 @@ class ReverListDemo {
         }
         int i = 0;
         while (head.next != null) {
-            ListNode newNode=new ListNode(1);
+            ListNode newNode = new ListNode(1);
             ListNode tempNode = head.next;
             newNode.next = head;
             head = tempNode;
-            head.next = i == 0 ? null :;
+            head.next = i == 0 ? null : null;
 
 
         }
+        return null;
     }
 
     /**
