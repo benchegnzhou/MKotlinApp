@@ -8,6 +8,7 @@ import org.jetbrains.anko.toast
 import zbc.com.cn.R
 import zbc.com.cn.network.entities.User
 import zbc.com.cn.presenter.LoginPresenter
+import zbc.com.cn.utils.UserMsg
 import java.lang.IllegalArgumentException
 
 class LoginActivity : BaseMvpActivity<LoginPresenter>() {
@@ -15,9 +16,25 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        signInButton.setOnClickListener {
-            presenter.doLogin(username.text.toString(), password.text.toString())
+
+
+        signInButton.setOnClickListener { view ->
+            when (view.id) {
+                R.id.tv_ok -> {
+                    UserMsg.userName = username.text.toString().trim()
+                    UserMsg.password = password.text.toString().trim().toLong()
+//                    UserMsg.visiable = "true" == (isVisable.text.toString().trim().toLowerCase())
+                    presenter.doLogin(username.text.toString(), password.text.toString())
+                }
+
+                else -> {
+
+                }
+            }
         }
+        username.setText(UserMsg.userName)
+        password.setText(UserMsg.password.toString())
+//        isVisable.setText(UserMsg.visiable.toString())
 
     }
 

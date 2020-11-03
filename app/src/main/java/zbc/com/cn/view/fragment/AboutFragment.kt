@@ -3,6 +3,7 @@ package zbc.com.cn.view.fragment
 import android.os.Bundle
 import android.view.Gravity
 import android.widget.ImageView
+import com.bennyhuo.tieguanyin.annotations.FragmentBuilder
 import org.jetbrains.anko.*
 
 import com.zbc.mvp.impl.BaseMvpFrament
@@ -19,6 +20,7 @@ import zbc.com.cn.view.activity.LoginActivity
  *
  * 本模块主要联系使用anko创建ui界面
  */
+@FragmentBuilder
 class AboutFragment : BaseMvpFrament<AboutPresenter>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
